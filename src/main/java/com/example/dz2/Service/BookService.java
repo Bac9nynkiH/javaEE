@@ -2,6 +2,7 @@ package com.example.dz2.Service;
 
 import com.example.dz2.Dto.BookDto;
 import com.example.dz2.Entity.Book;
+import com.example.dz2.Exception.AlreadyExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,10 @@ public class BookService {
 
     @Transactional
     public Book createBook(BookDto bookDto) {
-        return entityManager.merge(Book.of(bookDto));
+        if(findByIsbn(bookDto.getIsbn())==null)
+            return entityManager.merge(Book.of(bookDto));
+        else
+            throw new AlreadyExistsException("already exists");
     }
 
     @Transactional

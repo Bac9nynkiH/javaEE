@@ -14,6 +14,7 @@ import javax.persistence.Id;
 @Setter
 @ToString
 @Entity
+@EqualsAndHashCode
 public class Book {
     @Id
     private String isbn;
@@ -23,6 +24,6 @@ public class Book {
     public static Book of(BookDto bookDto){
         if(bookDto.getIsbn()==null||bookDto.getTitle()==null||bookDto.getIsbn().isEmpty()||bookDto.getTitle().isEmpty())
             throw new IllegalArgumentException("neither isbn bot title could be null");
-        return new Book(bookDto.getTitle(),bookDto.getIsbn(),bookDto.getAuthor());
+        return new Book(bookDto.getIsbn(),bookDto.getTitle(),bookDto.getAuthor());
     }
 }
