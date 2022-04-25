@@ -8,12 +8,32 @@
     <title>Document</title>
 </head>
 <body>
-<form th:method="post" th:object="${book}">
-    <input th:field="*{title}">
-    <input th:field="*{isbn}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script th:src="@{/script.js}"></script>
+<form id="bookForm">
+    <input id="title">
+    <input id="isbn">
     <button type="submit" id="addEmployee">add book</button>
 </form>
-<table> <thead> <th>name</th> <th>isbn</th> </thead> <tbody> <tr th:each="book: ${books}"> <td th:text= "${book.title}"></td> <td th:text="${book.isbn}"></td> </tr> </tbody> </table>
+<div>
+    <div>
+        <form id="isbn-form">
+            <label> search by isbn</label>
+            <input id="isbn-search">
+            <button type="submit" id="isbn-search-button">add book</button>
+        </form>
+        <table id="found-isbn"> <thead> <th>name</th> <th>isbn</th> </thead> <tbody> </tbody> </table>
+    </div>
+    <div>
+        <form id="title-form">
+            <label> search by title</label>
+            <input id="title-search">
+            <button type="submit" id="title-search-button">add book</button>
+        </form>
+    </div>
+    <table id="found-title"> <thead> <th>name</th> <th>isbn</th> </thead> <tbody> </tbody> </table>
+</div>
+<table id="books-table"> <thead> <th>name</th> <th>isbn</th> </thead> <tbody> </tbody> </table>
 </div>
 </body>
 </html>
