@@ -27,13 +27,13 @@ public class BookController {
         return bookService.findByIsbn(isbn);
     }
 
-    @GetMapping("/book-list/{author}")
+    @GetMapping("/book-list/author/{author}")
     @ResponseBody
     public List<Book> getBooksByAuthor(@PathVariable String author){
         return bookService.findByAuthor(author);
     }
 
-    @GetMapping("/book-list/{title}")
+    @GetMapping("/book-list/title/{title}")
     @ResponseBody
     public List<Book> getBooksByTitle(@PathVariable String title){
         return bookService.findByTitle(title);

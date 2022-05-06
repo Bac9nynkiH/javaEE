@@ -3,7 +3,9 @@ package com.example.dz2.Service;
 import com.example.dz2.Dto.BookDto;
 import com.example.dz2.Entity.Book;
 import com.example.dz2.Exception.AlreadyExistsException;
+import com.example.dz2.Repo.BookRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -13,38 +15,30 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class BookService {
-    private final EntityManager entityManager;
+    private final BookRepository bookRepository;
 
     @Transactional
     public Book createBook(BookDto bookDto) {
-        if(findByIsbn(bookDto.getIsbn())==null)
-            return entityManager.merge(Book.of(bookDto));
-        else
-            throw new AlreadyExistsException("already exists");
+            return bookRepository.save(Book.of(bookDto));
     }
 
     @Transactional
     public List<Book> findAllBooks(){
-        return entityManager.createQuery("SELECT b FROM Book b", Book.class)
-                .getResultList();
+        return bookRepository.findAll();
     }
 
     @Transactional
     public Book findByIsbn(String isbn){
-        return entityManager.find(Book.class, isbn);
+        return bookRepository.getByIsbn(isbn);
     }
 
     @Transactional
     public List<Book> findByAuthor(String author){
-        return entityManager.createQuery("SELECT b FROM Book b WHERE b.author = :author", Book.class)
-                .setParameter("author", author)
-                .getResultList();
+        return bookRepository.getByAuthor(author);
     }
 
     @Transactional
     public List<Book> findByTitle(String title){
-        return entityManager.createQuery("SELECT b FROM Book b WHERE b.title = :title", Book.class)
-                .setParameter("title", title)
-                .getResultList();
+        return bookRepository.getByTitle(title);
     }
 }
