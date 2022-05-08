@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -41,7 +42,7 @@ public class BookController {
 
     @PostMapping("/book-list")
     @ResponseBody
-    public Book addNewBook(@RequestBody BookDto book){
+    public Book addNewBook(@RequestBody @Valid BookDto book){
             return bookService.createBook(book);
     }
 

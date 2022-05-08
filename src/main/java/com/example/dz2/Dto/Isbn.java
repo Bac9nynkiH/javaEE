@@ -32,9 +32,11 @@ public @interface Isbn {
             Pattern pattern =
                     Pattern.compile("^(?:ISBN? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$)[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$");
             Matcher matcher = pattern.matcher(value);
-            if(!matcher.matches())
+            if(!matcher.matches()) {
                 return false;
+            }
             else{
+                value = value.replace(" ","").replace("-","").replace("ISBN","").replace(":","");
                 int sum = 0;
                 for (int i = 0; i < 9; i++)
                 {
@@ -50,7 +52,6 @@ public @interface Isbn {
                     return false;
 
                 sum += ((last == 'X') ? 10 : (last - '0'));
-
                 return (sum % 11 == 0);
             }
         }
