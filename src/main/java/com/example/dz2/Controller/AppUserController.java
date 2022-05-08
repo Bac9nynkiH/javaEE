@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.validation.Valid;
 import java.security.Principal;
 
 @Controller("/")
@@ -28,7 +29,7 @@ public class AppUserController {
     }
     @PostMapping("/registration")
     @ResponseBody
-    public AppUser getRegisterPage(RegistrationDto registrationDto){
+    public AppUser getRegisterPage(@Valid RegistrationDto registrationDto){
         return appUserService.registerNewAppUser(registrationDto.buildUser());
     }
     @GetMapping("/login")
