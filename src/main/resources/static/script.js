@@ -56,7 +56,6 @@ $(document).ready(function () {
 })
 
 function appendBook(book){
-    console.log("here");
     $("#books-table").find('tbody')
         .append(
             "<tr><td>"+book.title+"</td><td>"+book.isbn+"</td></tr>"
@@ -71,4 +70,19 @@ function appendBook(book){
         .append(
             "<tr class='hidden "+book.title+"' id='"+book.isbn+"'><td>"+book.title+"</td><td>"+book.isbn+"</td></tr>"
         );
+}
+
+function addBook(isbnToAdd){
+    console.log(isbnToAdd)
+    let isbn = isbnToAdd.substring(2);
+    $("#isbn").val(isbn);
+    $("#check").prop('checked', false);
+    $('#submit').trigger('click');
+}
+
+function removeBook(isbnToAdd){
+    $("#check").prop('checked', true);
+    let isbn = isbnToAdd.substring(2);
+    $("#isbn").val(isbn);
+    $('#submit').click();
 }

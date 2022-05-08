@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script th:src="@{/script.js}"></script>
+
+
+<form th:method="post" th:object="${bookToChange}" th:action="@{/books/liked}">
+    <input th:field="*{isbn}" id="isbn" type="hidden" class="form-control">
+    <input type="submit" class="btn btn-primary"
+           id="submit" value="save" style="display: none"/>
+    <input type="checkbox" id="check" th:field="*{delete}" style="display: none">
+</form>
+<div class="two-divs" style="display: flex">
+    <div class="all-books" style="display: flex;width: 50%; max-width: 50%; min-width: 50%">
+        <div class="book" th:each="book : ${allBooks}">
+            <span th:id="${book.isbn} + 'isbn'" th:text="${book.isbn}"></span>
+            <input type="button" th:id="'ba'+${book.isbn}" onmouseup="addBook(this.id)" value="ADD">
+        </div>
+    </div>
+    <div class="liked-books" style="display: flex;width: 50%; max-width: 50%; min-width: 50%">
+        <div class="book" th:each="book : ${likedBooks}">
+            <span th:id="${book.isbn} + 'isbn'" th:text="${book.isbn}"></span>
+            <input type="button" onmouseup="removeBook(this.id)" th:id="'br'+${book.isbn}" value="X">
+        </div>
+    </div>
+</div>
+</body>
+</html>

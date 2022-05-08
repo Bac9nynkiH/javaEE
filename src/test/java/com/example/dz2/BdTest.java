@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.context.jdbc.Sql;
+
+import java.util.HashSet;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = Dz2Application.class)
@@ -19,7 +22,7 @@ public class BdTest {
     public void test(){
         assert bookService.findByTitle("title1").size()==2;
         assert bookService.findByAuthor("author2").size()==2;
-        assert bookService.findByIsbn("1").equals(new Book("1","title1","author1"));
+        assert bookService.findByIsbn("1").equals(new Book("1","title1","author1", new HashSet<>()));
         BookDto bookDto = new BookDto("title4","5","author4");
         bookService.createBook(bookDto);
         assertEquals(bookService.findAllBooks().size(),5);
