@@ -15,17 +15,17 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target({ FIELD })
 @Retention(RUNTIME)
-@Constraint(validatedBy = IsbnAddress.IpAddressValidator.class)
+@Constraint(validatedBy = Isbn.IpAddressValidator.class)
 @Documented
-public @interface IsbnAddress {
+public @interface Isbn {
 
-    String message() default "{IpAddress.invalid}";
+    String message() default "{isbn.invalid}";
 
     Class<?>[] groups() default { };
 
     Class<? extends Payload>[] payload() default { };
 
-    class IpAddressValidator implements ConstraintValidator<IsbnAddress, String> {
+    class IpAddressValidator implements ConstraintValidator<Isbn, String> {
 
         @Override
         public boolean isValid(String value, ConstraintValidatorContext context) {

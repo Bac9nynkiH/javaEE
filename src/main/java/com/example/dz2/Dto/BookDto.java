@@ -11,6 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class BookDto {
     private String title;
+    @Isbn
     private String isbn;
     private String author;
 }
